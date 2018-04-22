@@ -1,0 +1,7 @@
+.page-wrapper{
+  @extend .pt-5, .pb-5;
+}
+
+.section-header{
+  @extend .d-flex, .align-items-center, .justify-content-between, .mb-4;
+}
