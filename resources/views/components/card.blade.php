@@ -1,4 +1,4 @@
-<div class="card mb-4">
+<div class="card mb-5">
     <img class="card-img-top" src="{{ $image }}" alt="Card image cap">
 
     <div class="card-body">
@@ -8,7 +8,7 @@
             {!! $subtitle !!}
         </p>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#twitchEmbedModal{{ $key }}">
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#twitchEmbedModal{{ $key }}">
             Watch stream
         </button>
     </div>

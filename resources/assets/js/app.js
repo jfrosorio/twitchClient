@@ -23,25 +23,31 @@ const app = new Vue({
 
 
 // Twitch Streams Embeds
-let embeds = document.querySelectorAll('.twitch-embed-modal');
+let modals = document.querySelectorAll('.twitch-embed-modal');
 
-if(embeds.length){
-    let twitch_embeds = [];
+if(modals.length){
+    modals.forEach(function (modal) {
+        let modal_body = modal.querySelector('.modal-body');
 
-    embeds.forEach(function (embed) {
-        let twitch_embed = new Twitch.Embed(embed, {
-            width: '100%',
-            height: embed.dataset.videoHeight,
-            channel: embed.dataset.channel,
-            layout: 'video',
-            autoplay: false
-        });
+        let twitch_player = new Twitch.Player(
+            modal_body, {
+                width: '100%',
+                height: 500,
+                channel: modal.dataset.channel,
+                layout: 'video',
+                allowfullscreen: false,
+                autoplay: false
+            }
+        );
 
-        twitch_embed.addEventListener(Twitch.Embed.VIDEO_READY, () => {
-            var player = twitch_embed.getPlayer();
-            player.play();
-        });
+        // play video on modal open
+        $(modal).on('show.bs.modal', function () {
+            twitch_player.play();
+        })
 
-        twitch_embeds.push(twitch_embed);
+        // pause video on modal close
+        $(modal).on('hidden.bs.modal', function () {
+            twitch_player.pause();
+        })
     });
 }

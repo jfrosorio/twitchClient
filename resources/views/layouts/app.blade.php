@@ -10,28 +10,25 @@
 </head>
 <body>
     <!-- Begin: Navbar -->
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
+    <nav class="navbar navbar-dark bg-secondary">
         <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
 
-            {!! Form::open(['action' => 'PagesController@index', 'method' => 'GET', 'class' => 'form-inline my-2 my-lg-0']) !!}
-                {!! Form::text('search', null, ['class' => 'form-control mr-sm-2', 'placeholder' => 'Search', 'aria-label' => 'Search']) !!}
-                {!! Form::button('Search', ['type' => 'submit', 'class' => 'btn btn-outline-success my-2 my-sm-0']) !!}
-            {!! Form::close() !!}
-        </div>
+        <span class="navbar-text">
+            Search for streams on Twitch!
+        </span>
     </nav>
     <!-- End: Navbar -->
 
     <!-- Begin: Content -->
     <div class="page-wrapper">
-        <div class="container">
+        <div class="container-fluid">
             @yield('content')
         </div>
     </div>
     <!-- End: Content -->
 
 
-    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+    <script src="http://player.twitch.tv/js/embed/v1.js"></script>
     <script src="{{ mix('js/app.js') }}"></script>
     @stack('js')
 </body>

@@ -2,77 +2,31 @@
 
 @section('content')
     <!-- Begin: Seaction header -->
-    <div class="section-header">
-        {{ $streams->count() }} {{ ($streams->count() == 1) ? 'stream' : 'streams' }} found
+    <div class="mb-5 d-md-flex justify-content-md-between align-items-md-center">
+        {{ $streams->total() }} {{ ($streams->total() == 1) ? 'stream' : 'streams' }} found
 
-        <!-- Begin: Records per page selector -->
-        @if($streams->count())
-            <div class="dropdown show">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Records
-                </a>
+        <!-- Begin: Records per page form -->
+        @if($streams->total() && !empty(config('records-sets.per-page.options')))
+            {!! Form::open(['action' => 'PagesController@index', 'method' => 'GET', 'class' => 'form-inline mt-3 mt-md-0']) !!}
+                {!! Form::label('rpp', 'Records per page', ['class' => 'd-none d-md-block']) !!}
+                {!! Form::select('rpp', [8 => 8, 24 => 24, 32 => 32], Cookie::get('records_per_page'), ['class' => 'form-control ml-md-2']) !!}
 
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">15</a>
-                    <a class="dropdown-item" href="#">30</a>
-                    <a class="dropdown-item" href="#">75</a>
-                    <a class="dropdown-item" href="#">120</a>
-                </div>
-            </div>
-    @endif
-    <!-- End: Records per page selector -->
+                {!! Form::text('search', null, ['class' => 'form-control my-2 mx-0 my-sm-0 mx-sm-2', 'placeholder' => 'Search', 'aria-label' => 'Search']) !!}
+
+                {!! Form::button('Search', ['type' => 'submit', 'class' => 'btn btn-secondary']) !!}
+            {!! Form::close() !!}
+        @endif
+        <!-- End: Records per page form -->
     </div>
     <!-- End: Seaction header -->
 
-    @if($streams->count())
-        {{ dump($streams) }}
-        <!-- Begin: Streams list -->
-        <div class="row">
-            @foreach($streams as $key => $stream)
-                <div class="col-md-6 col-lg-4">
-                    <!-- Begin: Card -->
-                    @include(
-                        'components.card',
-                        [
-                            'key' => $key,
-                            'image' => $stream->preview->medium,
-                            'title' => $stream->channel->status,
-                            'subtitle' => '<b>Channel:</b> ' . $stream->channel->display_name,
-                            'footer' => $stream->viewers . ' ' . (($stream->viewers == 1) ? 'viewer' : 'viewerss')
-                        ]
-                    )
-                    <!-- End: Card -->
 
-                    <!-- Begin: Modal -->
-                    <div class="modal fade" id="twitchEmbedModal{{ $key }}" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-
-                                <div class="modal-body twitch-embed-modal" data-channel="{{ $stream->channel->name }}"
-                                     data-video-height="{{ $stream->video_height }}"></div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End: Modal -->
-                </div>
-            @endforeach
-        </div>
-        <!-- End: Streams list -->
-
-        <!-- Begin: Pagination -->
-        {{ $streams->appends('search', request()->get('search'))->links() }}
-        <!-- End: Pagination -->
-    @endif
+    <!-- Begin: Streams list -->
+    @include(
+        'partials.streams-list',
+        [
+            'streams' => $streams
+        ]
+    )
+    <!-- End: Streams list -->
 @endsection

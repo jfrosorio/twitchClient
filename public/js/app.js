@@ -13898,26 +13898,30 @@ var app = new Vue({
 });
 
 // Twitch Streams Embeds
-var embeds = document.querySelectorAll('.twitch-embed-modal');
+var modals = document.querySelectorAll('.twitch-embed-modal');
 
-if (embeds.length) {
-    var twitch_embeds = [];
+if (modals.length) {
+    modals.forEach(function (modal) {
+        var modal_body = modal.querySelector('.modal-body');
 
-    embeds.forEach(function (embed) {
-        var twitch_embed = new Twitch.Embed(embed, {
+        var twitch_player = new Twitch.Player(modal_body, {
             width: '100%',
-            height: embed.dataset.videoHeight,
-            channel: embed.dataset.channel,
+            height: 500,
+            channel: modal.dataset.channel,
             layout: 'video',
+            allowfullscreen: false,
             autoplay: false
         });
 
-        twitch_embed.addEventListener(Twitch.Embed.VIDEO_READY, function () {
-            var player = twitch_embed.getPlayer();
-            player.play();
+        // play video on modal open
+        $(modal).on('show.bs.modal', function () {
+            twitch_player.play();
         });
 
-        twitch_embeds.push(twitch_embed);
+        // pause video on modal close
+        $(modal).on('hidden.bs.modal', function () {
+            twitch_player.pause();
+        });
     });
 }
 
