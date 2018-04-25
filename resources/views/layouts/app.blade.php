@@ -30,6 +30,8 @@
     </div>
     <!-- End: Content -->
 
+
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
     <script src="{{ mix('js/app.js') }}"></script>
     @stack('js')
 </body>

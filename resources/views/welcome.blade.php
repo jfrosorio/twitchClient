@@ -26,19 +26,46 @@
     <!-- End: Seaction header -->
 
     @if($streams->count())
+        {{ dump($streams) }}
         <!-- Begin: Streams list -->
         <div class="row">
-            @foreach($streams as $stream)
+            @foreach($streams as $key => $stream)
                 <div class="col-md-6 col-lg-4">
+                    <!-- Begin: Card -->
                     @include(
                         'components.card',
                         [
+                            'key' => $key,
                             'image' => $stream->preview->medium,
                             'title' => $stream->channel->status,
                             'subtitle' => '<b>Channel:</b> ' . $stream->channel->display_name,
                             'footer' => $stream->viewers . ' ' . (($stream->viewers == 1) ? 'viewer' : 'viewerss')
                         ]
                     )
+                    <!-- End: Card -->
+
+                    <!-- Begin: Modal -->
+                    <div class="modal fade" id="twitchEmbedModal{{ $key }}" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body twitch-embed-modal" data-channel="{{ $stream->channel->name }}"
+                                     data-video-height="{{ $stream->video_height }}"></div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End: Modal -->
                 </div>
             @endforeach
         </div>

@@ -8,7 +8,9 @@
             {!! $subtitle !!}
         </p>
 
-            <a href="#" class="btn btn-primary">Watch stream</a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#twitchEmbedModal{{ $key }}">
+            Watch stream
+        </button>
     </div>
 
     <div class="card-footer">

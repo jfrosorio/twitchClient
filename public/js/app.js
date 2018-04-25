@@ -13894,8 +13894,32 @@ window.Vue = __webpack_require__(36);
 Vue.component('example-component', __webpack_require__(39));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app'
 });
+
+// Twitch Streams Embeds
+var embeds = document.querySelectorAll('.twitch-embed-modal');
+
+if (embeds.length) {
+    var twitch_embeds = [];
+
+    embeds.forEach(function (embed) {
+        var twitch_embed = new Twitch.Embed(embed, {
+            width: '100%',
+            height: embed.dataset.videoHeight,
+            channel: embed.dataset.channel,
+            layout: 'video',
+            autoplay: false
+        });
+
+        twitch_embed.addEventListener(Twitch.Embed.VIDEO_READY, function () {
+            var player = twitch_embed.getPlayer();
+            player.play();
+        });
+
+        twitch_embeds.push(twitch_embed);
+    });
+}
 
 /***/ }),
 /* 13 */
