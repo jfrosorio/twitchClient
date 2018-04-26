@@ -1,6 +1,6 @@
 # Twitch Client App
 
-Lightweight Search Engine for finding stream on Twitch.tv.
+Lightweight Search Engine for finding streams on Twitch.tv.
 
 > *Twitch is a live streaming video platform owned by Twitch Interactive, a subsidiary of Amazon. Introduced in June 2011
 as a spin-off of the general-interest streaming platform, Justin.tv, the site primarily focuses on video game live
@@ -13,7 +13,7 @@ more recently, music broadcasts. Content on the site can either be viewed live o
 
 This is an application built with Laravel 5.6, so you might want to [check the documentation for further information.](https://laravel.com/docs/5.6/installation)
 
-After you have cloned this repository, use npm and composer to install the dependencies.
+After you have cloned this repository, use npm and composer to install the app dependencies.
 
     composer install
     npm install
