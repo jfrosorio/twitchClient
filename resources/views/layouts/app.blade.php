@@ -11,7 +11,7 @@
 <body>
     <!-- Begin: Navbar -->
     <nav class="navbar navbar-dark bg-secondary">
-        <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
+        <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name') }}</a>
 
         <span class="navbar-text">
             Search for streams on Twitch!
