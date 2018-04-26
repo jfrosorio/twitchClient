@@ -3,16 +3,17 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ExampleTest extends TestCase
+class WelcomePageTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Check if homepage returns 200 code.
      *
      * @return void
      */
-    public function testBasicTest()
+    public function testStatus()
     {
         $response = $this->get('/');
 
