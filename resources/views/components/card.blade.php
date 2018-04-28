@@ -2,15 +2,15 @@
     <img class="card-img-top" src="{{ $image }}" alt="Card image cap">
 
     <div class="card-body">
-        <h5 class="card-title">{{ $title }}</h5>
+        <h4 class="card-title">{{ $title }}</h4>
 
-        <p>
-            {!! $subtitle !!}
-        </p>
+        @if(!empty($text))
+            <p>
+                {!! $text !!}
+            </p>
+        @endif
 
-        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#twitchEmbedModal{{ $key }}">
-            Watch stream
-        </button>
+        <a class="btn btn-outline-primary" href="{{ $link }}">Watch stream</a>
     </div>
 
     <div class="card-footer">

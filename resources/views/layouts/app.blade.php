@@ -11,17 +11,30 @@
 <body>
     <!-- Begin: Navbar -->
     <nav class="navbar navbar-dark bg-secondary">
-        <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name') }}</a>
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name') }}</a>
 
-        <span class="navbar-text">
-            Search for streams on Twitch!
-        </span>
+            <span class="navbar-text">
+                Search for streams on Twitch!
+            </span>
+        </div>
     </nav>
     <!-- End: Navbar -->
 
+
+    <!-- Begin: Page header -->
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            @yield('page-header')
+        </div>
+    </div>
+    <!-- End: Page header -->
+
+
     <!-- Begin: Content -->
     <div class="page-wrapper">
-        <div class="container-fluid">
+        <div class="container">
             @yield('content')
         </div>
     </div>

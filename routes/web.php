@@ -13,3 +13,4 @@
 
 
 Route::get('/', 'PagesController@index');
+Route::get('/stream/{channel}', 'PagesController@showStream');
