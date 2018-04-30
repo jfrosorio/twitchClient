@@ -23,7 +23,7 @@ class SearchTest extends TestCase
 
         $results = Search::streams($options);
 
-        // It's expected results to be an array with two values: 'total' and 'streams'
+        // It's expected $results to be an array with two indexes: 'total' and 'streams'
         $this->assertCount(2, $results);
     }
 }

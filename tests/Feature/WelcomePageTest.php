@@ -19,4 +19,20 @@ class WelcomePageTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+
+    /**
+     * Check if page displays the expected title.
+     *
+     * @TODO change this to check if the title appears specifically inside the <h1> heading
+     * @return void
+     */
+    public function testPageTitle()
+    {
+        $welcome_message = 'Welcome to Twitch Client App';
+
+        $response = $this->get('/');
+
+        $response->assertSee($welcome_message);
+    }
 }
